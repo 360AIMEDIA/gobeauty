@@ -74,6 +74,8 @@ export default function SkinCapture({
   const [mode, setMode] = useState<"upload" | "camera">("upload");
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [facing, setFacing] = useState<"user" | "environment">("user");
+  const [stream, setStream] = useState<MediaStream | null>(null);
 
   const pickFile = useCallback(async (file: File) => {
     setError(null);
@@ -93,17 +95,20 @@ export default function SkinCapture({
   }, []);
 
   // Camera controls
-  const startCamera = useCallback(async () => {
+  const startCamera = useCallback(async (facingMode: "user" | "environment" = "user") => {
     setError(null);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
-      });
-      streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
       }
+      const media = await navigator.mediaDevices.getUserMedia({
+        // `ideal` (not exact) so single-camera devices still open instead of failing
+        video: { facingMode: { ideal: facingMode }, width: { ideal: 1280 }, height: { ideal: 720 } },
+      });
+      streamRef.current = media;
+      setStream(media);
+      setFacing(facingMode);
       setIsCameraActive(true);
       setMode("camera");
     } catch (err) {
@@ -115,6 +120,19 @@ export default function SkinCapture({
     }
   }, []);
 
+  // The <video> only mounts once isCameraActive is true, so attaching the
+  // stream inside startCamera hit a null ref and left the preview black.
+  // Attach it here, after mount.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !stream || !isCameraActive) return;
+    video.srcObject = stream;
+    video.play().catch(() => {});
+    return () => {
+      video.srcObject = null;
+    };
+  }, [stream, isCameraActive]);
+
   const stopCamera = useCallback(() => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => track.stop());
@@ -123,8 +141,13 @@ export default function SkinCapture({
     if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
+    setStream(null);
     setIsCameraActive(false);
   }, []);
+
+  const flipCamera = useCallback(() => {
+    void startCamera(facing === "user" ? "environment" : "user");
+  }, [facing, startCamera]);
 
   const takePhoto = useCallback(async () => {
     if (!videoRef.current || isCapturing) return;
@@ -143,6 +166,11 @@ export default function SkinCapture({
       const ctx = canvas.getContext("2d", { willReadFrequently: true });
       if (!ctx) throw new Error("Could not get canvas context");
 
+      // Front camera preview is mirrored; mirror the capture to match it
+      if (facing === "user") {
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+      }
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       const dataUrl = canvas.toDataURL("image/jpeg", 0.88);
@@ -157,7 +185,7 @@ export default function SkinCapture({
     } finally {
       setIsCapturing(false);
     }
-  }, [stopCamera, isCapturing]);
+  }, [stopCamera, isCapturing, facing]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -263,7 +291,7 @@ export default function SkinCapture({
                     Take a well-lit selfie in natural light for the most accurate skin analysis
                   </p>
                   <button
-                    onClick={startCamera}
+                    onClick={() => void startCamera()}
                     className="mt-8 rounded-full bg-brand-500 px-10 py-3.5 text-white font-semibold shadow-lg hover:bg-brand-600 transition text-lg"
                   >
                     Start Camera
@@ -276,11 +304,22 @@ export default function SkinCapture({
                     autoPlay
                     playsInline
                     muted
-                    className="w-full aspect-[4/3] object-cover"
+                    className={`w-full aspect-[4/3] object-cover ${facing === "user" ? "-scale-x-100" : ""}`}
                   />
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <p className="absolute top-4 w-full px-4 text-center text-xs font-medium text-white/85">
+                      Center your face in the circle
+                    </p>
                     <div className="w-64 h-64 border-2 border-white/70 rounded-full"></div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={flipCamera}
+                    aria-label="Switch between front and back camera"
+                    className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-lg text-white backdrop-blur-sm transition hover:bg-black/60"
+                  >
+                    🔄
+                  </button>
                   <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-4">
                     <button
                       onClick={stopCamera}
@@ -328,7 +367,7 @@ export default function SkinCapture({
                 setError(null);
                 // If we came from camera, restart it
                 if (mode === "camera" && !isCameraActive) {
-                  setTimeout(() => startCamera(), 100);
+                  setTimeout(() => startCamera(facing), 100);
                 }
               }}
               className="inline-flex min-h-12 items-center justify-center rounded-pill border border-line bg-white px-7 text-[14px] font-semibold text-ink hover:bg-surface-tint disabled:opacity-60"
