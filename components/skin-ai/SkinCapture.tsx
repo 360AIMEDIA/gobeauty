@@ -169,7 +169,7 @@ export default function SkinCapture({
   }, []);
 
   return (
-    <div className="rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6">
+    <div className="rounded-3xl border border-line bg-white p-5 shadow-lg sm:p-6">
       <input
         ref={fileRef}
         type="file"
@@ -242,7 +242,7 @@ export default function SkinCapture({
                   : "border-line bg-gradient-to-b from-[var(--beauty-blush)] to-white hover:border-brand-300"
               }`}
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-card text-3xl" aria-hidden>
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-md text-3xl" aria-hidden>
                 📸
               </div>
               <p className="mt-5 font-display text-2xl text-ink">Upload selfie</p>
