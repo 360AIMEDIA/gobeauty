@@ -300,6 +300,7 @@ export default function SkinCapture({
               )}
             </div>
           )}
+        </div>
       ) : (
         <div>
           <div className="relative mx-auto max-w-sm overflow-hidden rounded-2xl bg-surface-soft">
