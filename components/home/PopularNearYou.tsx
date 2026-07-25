@@ -52,14 +52,14 @@ export default function PopularNearYou() {
             <Link
               key={`${c.service}-${c.location}`}
               href={c.href}
-              className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover"
+              className="group relative overflow-hidden rounded-2xl shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={c.image}
                 alt={`${c.service} in ${c.location}`}
                 loading="lazy"
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                className="h-auto max-h-[380px] w-full object-cover transition duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-3.5">

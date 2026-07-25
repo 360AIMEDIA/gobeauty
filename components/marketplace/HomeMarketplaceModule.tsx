@@ -38,7 +38,7 @@ export default function HomeMarketplaceModule() {
               key={c.label}
               href="/marketplace"
               className={[
-                "group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-card",
+                "group relative overflow-hidden rounded-2xl shadow-card",
                 i % 2 === 1 ? "mt-4 sm:mt-6" : "",
               ].join(" ")}
             >
@@ -46,7 +46,7 @@ export default function HomeMarketplaceModule() {
               <img
                 src={c.image}
                 alt=""
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                className="h-auto max-h-[420px] w-full object-cover transition duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
               <span className="absolute bottom-3 left-3 text-[14px] font-bold text-white drop-shadow">

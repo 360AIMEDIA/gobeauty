@@ -130,7 +130,7 @@ export default function HomeHero() {
             <img
               src="/assets/cover.webp"
               alt="Glowing skin with soft glam makeup at a vanity"
-              className="aspect-[4/5] w-full rounded-[28px] object-cover shadow-[0_18px_50px_rgba(20,12,36,0.14)]"
+              className="w-full max-h-[520px] rounded-[28px] object-cover shadow-[0_18px_50px_rgba(20,12,36,0.14)]"
             />
             <div className="absolute -left-8 bottom-8 rounded-2xl border border-line-soft bg-white/95 px-4 py-3 shadow-cardHover backdrop-blur">
               <p className="text-[12px] font-bold uppercase tracking-wider text-brand-600">

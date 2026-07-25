@@ -18,13 +18,13 @@ export default function AudienceEntryCards() {
             <Link
               key={e.href}
               href={e.href}
-              className="group relative aspect-[16/11] overflow-hidden rounded-2xl md:aspect-[4/5]"
+              className="group relative overflow-hidden rounded-2xl"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={e.image}
                 alt=""
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                className="h-auto max-h-[420px] w-full object-cover transition duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/40 to-ink/10" />
               <div className="absolute inset-x-0 bottom-0 p-5">
