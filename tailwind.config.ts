@@ -57,6 +57,7 @@ const config: Config = {
         card: "0 1px 2px rgba(15,20,25,0.04), 0 1px 3px rgba(15,20,25,0.04)",
         cardHover:
           "0 10px 30px rgba(15,20,25,0.08), 0 2px 6px rgba(15,20,25,0.04)",
+        lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       },
       borderRadius: {
         pill: "999px",

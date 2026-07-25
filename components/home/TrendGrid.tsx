@@ -12,12 +12,21 @@ import {
 // infinite homepage scroll. Mobile starts smaller than desktop.
 const INITIAL_COUNT = 8;
 
+// Varied crop heights so the masonry feed staggers like an Instagram/Pinterest
+// mobile feed instead of aligning into uniform rows.
+const ASPECT_CLASS: Record<NonNullable<TrendCard["aspect"]>, string> = {
+  wide: "aspect-[4/3]",
+  square: "aspect-square",
+  portrait: "aspect-[3/4]",
+  tall: "aspect-[2/3]",
+};
+
 export function TrendCardTile({ card }: { card: TrendCard }) {
   const badge = TREND_CARD_BADGES[card.type];
   return (
     <Link
       href={card.href}
-      className="group block overflow-hidden rounded-2xl border border-line-soft bg-white shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover"
+      className="group mb-3 block break-inside-avoid overflow-hidden rounded-2xl border border-line-soft bg-white shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover md:mb-4"
     >
       <div className="relative">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -27,7 +36,7 @@ export function TrendCardTile({ card }: { card: TrendCard }) {
           loading="lazy"
           className={[
             "w-full object-cover transition duration-300 group-hover:scale-[1.02]",
-            card.aspect === "square" ? "aspect-square" : "aspect-[3/4]",
+            ASPECT_CLASS[card.aspect ?? "portrait"],
           ].join(" ")}
         />
         <span
@@ -86,7 +95,7 @@ export default function TrendGrid() {
           </Link>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+        <div className="mt-6 columns-2 gap-3 md:columns-3 md:gap-4 lg:columns-4">
           {cards.map((card) => (
             <TrendCardTile key={card.id} card={card} />
           ))}

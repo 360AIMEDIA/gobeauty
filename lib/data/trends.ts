@@ -14,8 +14,8 @@ export interface TrendCard {
   href: string;
   /** Only for pro cards — keeps location context visible (PRD §6.3). */
   location?: string;
-  /** Landscape-ish vs portrait crop hint for the masonry-style grid. */
-  aspect?: "portrait" | "square";
+  /** Crop hint for the masonry feed — varied heights like an Instagram/Pinterest mobile feed. */
+  aspect?: "wide" | "square" | "portrait" | "tall";
 }
 
 export const TREND_CARD_BADGES: Record<
@@ -40,7 +40,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1570172619644-dfd03ed5d881"),
     tags: ["K-beauty", "Facial"],
     href: "/looks-trends",
-    aspect: "portrait",
+    aspect: "tall",
   },
   {
     id: "korean-bridal-nails",
@@ -49,7 +49,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: "/assets/nail_06_nude_shimmer.jpg",
     tags: ["Nails", "Bridal"],
     href: "/looks-trends",
-    aspect: "portrait",
+    aspect: "square",
   },
   {
     id: "soft-korean-perm",
@@ -67,7 +67,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1487412947147-5cebf100ffc2"),
     tags: ["Lashes", "Low-maintenance"],
     href: "/looks-trends",
-    aspect: "square",
+    aspect: "wide",
   },
   {
     id: "chrome-french-tips",
@@ -85,7 +85,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1556228578-8c89e6adf883"),
     tags: ["Skin barrier", "Routine"],
     href: "/shop-products",
-    aspect: "square",
+    aspect: "tall",
   },
   {
     id: "barrier-repair-picks",
@@ -94,7 +94,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1620331311520-246422fd82f9"),
     tags: ["Pro-recommended", "Sensitive skin"],
     href: "/shop-products",
-    aspect: "portrait",
+    aspect: "square",
   },
   {
     id: "top-facial-pros",
@@ -104,7 +104,7 @@ export const TREND_CARDS: TrendCard[] = [
     tags: ["Hydrating facial"],
     href: "/find-pros",
     location: "New Jersey",
-    aspect: "square",
+    aspect: "tall",
   },
   {
     id: "cuticle-oil-pros-love",
@@ -113,7 +113,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1598440947619-2c35fc9aa908"),
     tags: ["Nail aftercare"],
     href: "/shop-products",
-    aspect: "portrait",
+    aspect: "square",
   },
   {
     id: "3d-cherry-almond",
@@ -131,7 +131,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1522337660859-02fbefca4702"),
     tags: ["Hair", "Scalp serum"],
     href: "/looks-trends",
-    aspect: "square",
+    aspect: "wide",
   },
   {
     id: "keratin-aftercare",
@@ -150,7 +150,7 @@ export const TREND_CARDS: TrendCard[] = [
     tags: ["Gel manicure"],
     href: "/local-rankings",
     location: "Edison, NJ",
-    aspect: "portrait",
+    aspect: "tall",
   },
   {
     id: "clean-girl-nails",
@@ -168,7 +168,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1616683693504-3ea7e9ad6fec"),
     tags: ["Skin", "Facial spa"],
     href: "/looks-trends",
-    aspect: "portrait",
+    aspect: "tall",
   },
   {
     id: "post-wax-care",
@@ -195,7 +195,7 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1608248543803-ba4f8c70ae0b"),
     tags: ["Med spa", "Aftercare"],
     href: "/shop-products",
-    aspect: "square",
+    aspect: "wide",
   },
   {
     id: "lash-studio-jersey-city",
@@ -214,6 +214,6 @@ export const TREND_CARDS: TrendCard[] = [
     image: u("1526758097130-bab247274f58"),
     tags: ["Skin", "Routine"],
     href: "/looks-trends",
-    aspect: "square",
+    aspect: "tall",
   },
 ];

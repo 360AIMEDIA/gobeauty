@@ -54,7 +54,7 @@ export default function LooksTrendsGrid({ initialType }: { initialType?: string 
         ))}
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+      <div className="mt-5 columns-2 gap-3 md:columns-3 md:gap-4 lg:columns-4">
         {cards.map((card) => (
           <TrendCardTile key={card.id} card={card} />
         ))}
