@@ -44,6 +44,7 @@ const BUSINESS_LINKS = [
 const LEARN_LINKS = [
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
+  { label: "AI Visibility", href: "/ai-visibility" },
 ];
 
 const PRODUCTS_ACTIVE_PREFIXES = [

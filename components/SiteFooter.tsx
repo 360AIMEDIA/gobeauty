@@ -43,6 +43,7 @@ export default function SiteFooter() {
               { label: "Looks & Trends", href: "/looks-trends" },
               { label: "Blog", href: "/blog" },
               { label: "FAQ", href: "/faq" },
+              { label: "AI Visibility", href: "/ai-visibility" },
             ]}
           />
           <FooterCol
@@ -74,6 +75,7 @@ export default function SiteFooter() {
           <div>© {new Date().getFullYear()} GoBeauty, Inc. All rights reserved.</div>
           <div className="flex flex-wrap gap-5">
             <Link href="/faq" className="hover:text-ink">FAQ</Link>
+            <Link href="/ai-visibility" className="hover:text-ink">AI Visibility</Link>
             <Link href="/blog" className="hover:text-ink">Blog</Link>
             <Link href="/sms-consent" className="hover:text-ink">SMS Consent</Link>
             <Link href="/privacy" className="hover:text-ink">Privacy Policy</Link>
