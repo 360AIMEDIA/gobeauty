@@ -3,10 +3,10 @@ import { isIP } from "node:net";
 import { CHECKS, PLATFORMS, type CheckId, type PlatformId, type ScanCheck, type ScanPlatform, type ScanResult } from "./visibility-model";
 
 const PLATFORM_WEIGHTS: Record<PlatformId, Record<CheckId, number>> = {
-  chatgpt: { crawl: 20, indexable: 12, snippet: 6, place: 2, answers: 18, schema: 12, contact: 2, path: 2, llms: 22, fresh: 4 },
-  perplexity: { crawl: 12, indexable: 18, snippet: 8, place: 4, answers: 24, schema: 10, contact: 2, path: 2, llms: 18, fresh: 2 },
-  gemini: { crawl: 14, indexable: 14, snippet: 6, place: 4, answers: 16, schema: 24, contact: 2, path: 4, llms: 14, fresh: 2 },
-  google: { crawl: 10, indexable: 24, snippet: 8, place: 4, answers: 22, schema: 14, contact: 2, path: 4, llms: 10, fresh: 2 }
+  chatgpt: { crawl: 16, indexable: 10, snippet: 6, place: 6, answers: 12, schema: 12, contact: 6, path: 4, llms: 18, fresh: 10 },
+  perplexity: { crawl: 8, indexable: 16, snippet: 8, place: 8, answers: 18, schema: 10, contact: 6, path: 4, llms: 14, fresh: 8 },
+  gemini: { crawl: 10, indexable: 12, snippet: 6, place: 8, answers: 12, schema: 22, contact: 8, path: 6, llms: 10, fresh: 6 },
+  google: { crawl: 8, indexable: 18, snippet: 8, place: 8, answers: 16, schema: 14, contact: 8, path: 6, llms: 8, fresh: 6 }
 };
 
 type Evidence = {
